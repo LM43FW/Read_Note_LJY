@@ -1,0 +1,272 @@
+/* index.css */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Noto+Sans+SC:wght@300;500;700&display=swap');
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    font-family: 'Noto Sans SC', sans-serif;
+    min-height: 100vh;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    max-width: 1600px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+/* 修改分割线样式 */
+.container::after { 
+    content: '';
+    position: fixed;  /*####### 改为固定定位*/
+    left: 40%;
+    top: 0;           /*####### 从顶部开始*/
+    height: 100vh;    /*####### 全屏高度 */
+    width: 3px;
+    background: linear-gradient(to bottom, 
+        rgba(100,200,255,0.5) 0%,
+        #00b894 50%,       /*####### 统一为左侧边框颜色*/   
+        rgba(100,200,255,0.5) 100%);
+    border-radius: 2px;
+    z-index: 1;        /*####### 确保在背景上方*/
+}
+
+/* 统一背景 */
+.left, .right {
+    padding: 80px 40px 40px;
+    overflow-y: auto;
+    height: 100vh;
+    box-sizing: border-box;
+    background: rgba(255,255,255,0.95) !important;  /*####### 统一白色背景*/
+}
+
+.left {
+    flex: 2;
+    width: 40%;
+}
+
+/* 新增滚动条样式 */
+.left::-webkit-scrollbar {  /*#######*/
+    width: 6px;  /* 滚动条宽度 */
+}
+
+.left::-webkit-scrollbar-track {  /*#######*/
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+}
+
+.right {
+    flex: 3;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 标题居中样式 */
+.right h1 {
+    font-size: 2.5rem;
+    margin: 0 auto 3rem;  /*####### 水平居中*/ 
+    background: linear-gradient(135deg, #6c5ce7, #00b894);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    font-family: 'Pacifico', cursive;
+    width: fit-content;    /*####### 自适应宽度*/
+    text-align: center;   /*####### 文字居中*/
+}
+
+.title {
+    font-size: 2.2rem;
+    color: #2d3436;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 3px solid #00b894;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.text {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #4a4a4a;
+    text-align: justify;
+    hyphens: auto;
+    padding-right: 15px;
+}
+
+img {
+    width: 100%;
+    max-width: 80%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    margin: 0 auto 3rem;
+    display: block;
+}
+
+img:hover {
+    transform: translateY(-5px);
+}
+
+/* 按钮容器新样式 */
+.button-container {
+    position: sticky;
+    bottom: 40px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding: 15px 0;
+    background: linear-gradient(to top, 
+        rgba(248,249,250,0.95) 60%,
+        rgba(248,249,250,0.5) 100%);
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #6c5ce7 0%, #00b894 100%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(108,92,231,0.3);
+}
+
+/* 新增页节信息样式 */
+.page-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    background: rgba(108,92,231,0.1);
+    border-radius: 30px;
+    margin: 0 1rem;
+}
+
+.page-info {
+    font-size: 1rem;
+    color: #6c5ce7;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(108,92,231,0.2);
+    white-space: nowrap;
+}
+
+.page-alert {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(108,92,231,0.9);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.page-alert.show {
+    opacity: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        align-items: stretch;
+    }
+    
+    .left, .right {
+        width: 100% !important;
+        height: auto;
+        padding: 60px 30px 30px !important;
+    }
+    
+    .container::after {
+        display: none;
+    }
+    
+    .button-container {
+        position: static;
+        background: transparent;
+    }
+
+    .right h1 {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .right h1 {
+        font-size: 2rem !important;
+        margin-bottom: 2rem;
+    }
+    
+    img {
+        max-width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .left, .right {
+        padding: 40px 20px 20px !important;
+    }
+
+    /* 移动端页节信息适配 */
+    .page-wrapper {
+        padding: 0 1rem;
+        margin: 0 0.5rem;
+    }
+    
+    .page-info {
+        font-size: 0.9rem;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    
+    .page-alert {
+        bottom: 110%;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .button-container {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .page-wrapper {
+        order: -1;
+        width: 100%;
+        justify-content: center;
+        margin: 0;
+        background: none;
+    }
+}
+
+/* Firefox滚动条兼容 */
+@supports (-moz-appearance:none) {
+    .left {
+        scrollbar-width: thin;
+        scrollbar-color: #00b894 rgba(255,255,255,0.1);
+    }
+}
